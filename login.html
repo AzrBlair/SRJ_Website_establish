@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="login.html" id="login-icon">Login</a>
+        </nav>
+    </header>
+    <div class="login-container">
+        <h2>Login</h2>
+        <!-- <label for="loginType">Select Login Type:</label> -->
+        <select id="loginType" name="loginType">
+            <option value="customer">Customer Login</option>
+            <option value="vendor">Vendor Login</option>
+        </select>
+        <!-- login form------------------- -->
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div id="error-message"></div>
+        <button id="signUpButton">Sign Up</button>
+    </div>
+<!-- ----------sign up pop window--------------- -->
+    <div id="signUpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2> Customer Sign Up</h2>
+            <form id="signUpForm">
+                <label for="newUsername">Username:</label>
+                <input type="text" id="newUsername" name="newUsername" required>
+                <label for="newPassword">Password:</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <button type="submit">Confirm Sign Up</button>
+            </form>
+            <div id="signUpErrorMessage"></div>
+        </div>
+    </div>
+<!-- ----sucess pop up window -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Success</h2>
+            <p>Sign up successful!</p>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

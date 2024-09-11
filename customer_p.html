@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Portal</title>
+    <link rel="stylesheet" href="css/customer_p.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="home.html" id="logo"><strong>SRJ, Inc.</strong></a>
+            <a href="customer_p.html" id="logo">Customer Portal</a>
+            <a href="logout.html" id="logout">Logout</a>
+        </nav>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li class="category-box">Order
+                    <ul>
+                        <li><a href="#quote">Quote</a></li>
+                        <li><a href="#in-progress">In Progress</a></li>
+                        <li><a href="#history">History</a></li>
+                    </ul>
+                </li>
+                <li class="category-box">Bill
+                    <ul>
+                        <li><a href="#unpaid">Unpaid Bill</a></li>
+                        <li><a href="#billing-history">Billing History</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+        <main class="content">
+            <!-- Dashboard Section -->
+            <section id="dashboard">
+                <h2>Dashboard</h2>
+                <!-- Dashboard content here -->
+                 <!-- Section for 1 week from now -->
+                <div class="dashboard-box upcoming-week">
+                    <h3>Upcoming in 1 Week</h3>
+                    <ul>
+                        <li>Sep/3: Estimate arriving shipment item1</li>
+                        <li>Sep/10: Bill due</li>
+                    </ul>
+                </div>
+                
+                <!-- Section for future upcoming events -->
+                <div class="dashboard-box future-updates">
+                    <h3>Upcoming in Future</h3>
+                    <ul>
+                        <li>Sep/14: Estimate arriving item2</li>
+                        <li>Sep/20: Project milestone</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Quote Section -->
+            <section id="quote">
+                <h2>Quote</h2>
+                <button id="createQuoteButton" class="create-quote-button">Create New Quote</button>
+                <div class="tabs">
+                    <button class="tablinks" onclick="openTab(event, 'existing-quotes')">Existing Quotes</button>
+                    <button class="tablinks" onclick="openTab(event, 'sent-quotes')">Sent Quotes</button>
+                    <button class="tablinks" onclick="openTab(event, 'quote-draft')">Quote Draft</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="existing-quotes" class="tabcontent">
+                    <h3>Existing Quotes</h3>
+                    <ul class="quote-list">
+                        <li onclick="showQuoteDetails('existing', 1)">Quote #1</li>
+                        <li onclick="showQuoteDetails('existing', 2)">Quote #2</li>
+                        <!-- Add more quotes as needed -->
+                    </ul>
+                </div>
+
+                <div id="sent-quotes" class="tabcontent">
+                    <h3>Sent Quotes</h3>
+                    <ul class="quote-list">
+                        <li onclick="showQuoteDetails('sent', 1)">Sent Quote #1</li>
+                        <li onclick="showQuoteDetails('sent', 2)">Sent Quote #2</li>
+                        <!-- Add more sent quotes as needed -->
+                    </ul>
+                </div>
+
+                <div id="quote-draft" class="tabcontent">
+                    <h3>Quote Draft</h3>
+                    <ul class="quote-list">
+                        <li onclick="showQuoteDetails('draft', 1)">Draft Quote #1</li>
+                        <li onclick="showQuoteDetails('draft', 2)">Draft Quote #2</li>
+                        <!-- Add more draft quotes as needed -->
+                    </ul>
+                    <div id="new-quote-box" style="display: none;">
+                        <textarea id="new-quote-text" placeholder="Write your quote here..."></textarea>
+                        <button id="saveQuoteButton">Save Quote</button>
+                    </div>
+                </div>
+
+                <!-- Quote Details Box -->
+                <div id="quote-details" class="quote-details">
+                    <h3>Quote Details</h3>
+                    <p>Select a quote to view details.</p>
+                </div>
+            </section>
+
+            <!-- Other sections -->
+            <section id="in-progress">
+                <h2>In Progress</h2>
+                <p>Tracking shipping status, item info, etc.</p>
+            </section>
+
+            <section id="history">
+                <h2>Order History</h2>
+                <p>Details of past orders.</p>
+            </section>
+
+            <section id="unpaid">
+                <h2>Unpaid Bill</h2>
+                <p>List of unpaid bills.</p>
+            </section>
+
+            <section id="billing-history">
+                <h2>Billing History</h2>
+                <p>History of payments and bills.</p>
+            </section>
+        </main>
+    </div>
+    <script src="js/customer_p.js"></script>
+</body>
+</html>

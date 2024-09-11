@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <header>
+        <div class="title">
+            <strong>SRJ, Inc.</strong>
+        </div>
+        <nav class="function_button">
+            <a href="home.html">Home</a>
+            <a href="category.html">Category</a>
+            <a href="login.html" id="login-icon">Login</a>
+        </nav>
+    </header>
+    <div class="scroll-container">
+        <div class="gif-container">
+            <div class="gif-item">
+                <a href="#video1" class="gif-link">
+                    <img src="video/greengif.gif" alt="gif1">
+                </a>
+            </div>
+            <div class="gif-item">
+                <a href="#video2" class="gif-link">
+                    <img src="video/spraygif.gif" alt="gif2">
+                </a>
+            </div>
+            <div class="gif-item">
+                <a href="#video3" class="gif-link">
+                    <img src="video/wrapgif.gif" alt="gif3">
+                </a>
+            </div>
+            <!-- Duplicate GIFs for seamless scrolling -->
+            <div class="gif-item">
+                <a href="#video1" class="gif-link">
+                    <img src="video/greengif.gif" alt="gif1">
+                </a>
+            </div>
+            <div class="gif-item">
+                <a href="#video2" class="gif-link">
+                    <img src="video/spraygif.gif" alt="gif2">
+                </a>
+            </div>
+            <div class="gif-item">
+                <a href="#video3" class="gif-link">
+                    <img src="video/wrapgif.gif" alt="gif3">
+                </a>
+            </div>
+            <div class="gif-item">
+                <a href="#video1" class="gif-link">
+                    <img src="video/greengif.gif" alt="gif1">
+                </a>
+            </div>
+            <div class="gif-item">
+                <a href="#video2" class="gif-link">
+                    <img src="video/spraygif.gif" alt="gif2">
+                </a>
+            </div>
+            <div class="gif-item">
+                <a href="#video3" class="gif-link">
+                    <img src="video/wrapgif.gif" alt="gif3">
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pop-up video sections -->
+    <div id="video1" class="video-popup">
+        <div class="video-popup-content">
+            <span class="close">&times;</span>
+            <video controls width="100%">
+                <source src="video/Green.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+    
+    <div id="video2" class="video-popup">
+        <div class="video-popup-content">
+            <span class="close">&times;</span>
+            <video controls width="100%">
+                <source src="video/spray.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+    
+    <div id="video3" class="video-popup">
+        <div class="video-popup-content">
+            <span class="close">&times;</span>
+            <video controls width="100%">
+                <source src="video/wrapgif.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+        <div class="search-container">
+            <form id="searchForm">
+                <label for="searchQuery" class="search-label">What are you looking for:</label>
+                <div class="search-bar">
+                    <input type="text" id="searchQuery" name="searchQuery" required>
+                    <button type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+        <div id="search-results"></div>
+    </div>
+    <div class="content">
+    </div>
+    <script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #4f5682;
+            color: #333;
+        }
+        .logout-message {
+            text-align: center;
+            background-color: white;
+            padding: 2em;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-message">
+        <h1>You just logged out</h1>
+        <p>You will be redirected back to the SRJ home page in <span id="countdown">4</span> seconds.</p>
+    </div>
+    <script>
+        let countdownElement = document.getElementById('countdown');
+        let countdownValue = 4;
+
+        // Function to update the countdown every second
+        let countdownTimer = setInterval(function() {
+            countdownValue--;  // Decrease countdown value
+            countdownElement.textContent = countdownValue;  // Update the countdown display
+
+            if (countdownValue <= 0) {
+                clearInterval(countdownTimer);  // Stop the countdown timer
+                window.location.href = "home.html";  // Redirect to home page
+            }
+        }, 1000);  // Update every second (1000 milliseconds)
+    </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    background: linear-gradient(to bottom right, rgb(103, 134, 199), black), 
+                radial-gradient(circle at top left, rgba(255, 255, 255, 0.3), transparent 50%);
+    background-blend-mode: screen; /* Blend the gradients */
+    height: 100vh; /* Ensure enough scrolling space */
+    color: white;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background: linear-gradient(to top left, rgb(129, 21, 21), black);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+/* header color */
+header {
+    background-color: #000000;
+    color: white;
+    padding: 1em;
+    text-align: right;
+}
+
+/* nav click color: top right */
+nav a {
+    color: white;
+    margin: 0 1em;
+    text-decoration: none;
+}
+
+h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input, select {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100px;
+    background-color: #2edb2c;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto; /* Center the button horizontally */
+    margin-right: auto; /* Center the button horizontally */
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #000000;
+}
+
+#signUpButton {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: transparent;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background: linear-gradient(to top left, rgb(122, 153, 202), rgb(113, 194, 189));
+    margin: 5% auto;
+    padding: 10px;
+    border: 1px solid #000000;
+    top:-10px;
+    position: relative;
+    font: bold;
+
+    width: 1200px;
+    height: 360px;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+#error-message, #signUpErrorMessage {
+    color: rgb(186, 0, 0);
+    
+    text-align: center;
+}
+
+.close {
+    color: #6f6767;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
