@@ -14,13 +14,7 @@
         </nav>
     </header>
     <div class="login-container">
-        <h2>Login</h2>
-        <!-- <label for="loginType">Select Login Type:</label> -->
-        <select id="loginType" name="loginType">
-            <option value="customer">Customer Login</option>
-            <option value="vendor">Vendor Login</option>
-        </select>
-        <!-- login form------------------- -->
+        <h2>Customer Login</h2>
         <form id="loginForm">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
@@ -31,11 +25,10 @@
         <div id="error-message"></div>
         <button id="signUpButton">Sign Up</button>
     </div>
-<!-- ----------sign up pop window--------------- -->
     <div id="signUpModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2> Customer Sign Up</h2>
+            <h2>Customer Sign Up</h2>
             <form id="signUpForm">
                 <label for="newUsername">Username:</label>
                 <input type="text" id="newUsername" name="newUsername" required>
@@ -48,15 +41,13 @@
             <div id="signUpErrorMessage"></div>
         </div>
     </div>
-<!-- ----sucess pop up window -->
     <div id="successModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Success</h2>
-            <p>Sign up successful!</p>
+            <p id="successMessage">Sign up successful!</p>
         </div>
     </div>
-
     <script src="js/login.js"></script>
 </body>
 </html>

@@ -66,3 +66,41 @@ document.getElementById("createQuoteButton").addEventListener("click", function(
     openTab(event, 'quote-draft');
     document.getElementById("new-quote-box").style.display = "block";
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/api/get-contact-info') // Assume this API checks if contact info exists
+      .then(response => response.json())
+      .then(data => {
+        if (!data.hasContactInfo) {
+          document.getElementById('contact-notification').style.display = 'block';
+        }
+      });
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const storePopup = document.getElementById('store-popup');
+    const storeNumberDisplay = document.getElementById('store-number');
+    const storeSelectButton = document.getElementById('store-select-button');
+
+    // Show store selection popup
+    storePopup.style.display = 'flex';
+
+    storeSelectButton.addEventListener('click', function() {
+        const storeNumberInput = document.getElementById('store-number-input').value;
+
+        // Display selected store number
+        storeNumberDisplay.textContent = `UR Store #${storeNumberInput}`;
+        
+        // Close the popup after selection
+        storePopup.style.display = 'none';
+    });
+
+    // Handle form submission for customer info
+    const customerInfoForm = document.getElementById('customer-info-form');
+    customerInfoForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Future integration with Sage100 will happen here
+        alert('Customer info has been saved. This will be linked to Sage100 in the future.');
+    });
+});

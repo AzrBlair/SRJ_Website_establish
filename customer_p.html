@@ -13,7 +13,9 @@
             <a href="customer_p.html" id="logo">Customer Portal</a>
             <a href="logout.html" id="logout">Logout</a>
         </nav>
+        <div id="store-number" class="store-number"></div>
     </header>
+
     <div class="container">
         <aside class="sidebar">
             <h2>Menu</h2>
@@ -32,6 +34,7 @@
                         <li><a href="#billing-history">Billing History</a></li>
                     </ul>
                 </li>
+                <li><a href="#customer-info">Customer Info</a></li>
             </ul>
         </aside>
         <main class="content">
@@ -46,6 +49,10 @@
                         <li>Sep/3: Estimate arriving shipment item1</li>
                         <li>Sep/10: Bill due</li>
                     </ul>
+                </div>
+
+                <div id="contact-notification" style="display: none; background-color: #f8d7da; padding: 10px; border: 1px solid red; color: red;">
+                    <strong>Please upload your contact information (email, phone number, address) to continue using the portal efficiently.</strong>
                 </div>
                 
                 <!-- Section for future upcoming events -->
@@ -126,6 +133,25 @@
             <section id="billing-history">
                 <h2>Billing History</h2>
                 <p>History of payments and bills.</p>
+            </section>
+
+            <section id="customer-info">
+                <h2>Customer Info</h2>
+                <form id="customer-info-form">
+                    <label for="contact-name">Name:</label>
+                    <input type="text" id="contact-name" name="contact-name" required>
+                    <br>
+                    <label for="contact-phone">Telephone No.:</label>
+                    <input type="tel" id="contact-phone" name="contact-phone" required>
+                    <br>
+                    <label for="contact-email">Email Address:</label>
+                    <input type="email" id="contact-email" name="contact-email" required>
+                    <br>
+                    <label for="contact-address">Shipping Address:</label>
+                    <input type="text" id="contact-address" name="contact-address" required>
+                    <br>
+                    <button type="submit">Save Info</button>
+                </form>
             </section>
         </main>
     </div>
