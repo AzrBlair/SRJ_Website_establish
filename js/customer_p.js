@@ -27,12 +27,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show the first section (Dashboard) by default
     showSection('dashboard');
 
-    // Set the default tab open for "Quote" if you want
-    if (document.getElementById('quote').style.display === 'block') {
-        document.getElementById('create').style.display = 'block';  // Show default tab content
+    // Fetch customer info when the page loads
+    const userId = localStorage.getItem('userId'); // Get the user ID from local storage
+
+    if (userId) {
+        fetch(`/api/customer-info/${userId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success === false) {
+                    document.getElementById('infoDisplay').innerText = data.message;
+                } else {
+                    // Display the customer info
+                    const infoDisplay = document.getElementById('infoDisplay');
+                    infoDisplay.innerHTML = `
+                        <p>Name: ${data.name}</p>
+                        <p>Email: ${data.email}</p>
+                        <p>Phone: ${data.phone}</p>
+                        <p>Address: ${data.address}</p>
+                    `;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching customer info:', error);
+                document.getElementById('infoDisplay').innerText = 'Error fetching customer info.';
+            });
+    } else {
+        document.getElementById('infoDisplay').innerText = 'No user ID found.';
     }
 });
 
+// Additional functionality for tabs and other UI interactions can be added below
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
     
@@ -52,55 +81,3 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
 }
-
-// Default tab open
-document.getElementsByClassName("tablinks")[0].click();
-
-function showQuoteDetails(type, id) {
-    var detailsBox = document.getElementById("quote-details");
-    detailsBox.innerHTML = `<h3>${type.charAt(0).toUpperCase() + type.slice(1)} Quote #${id} Details</h3>
-                            <p>Details about ${type} quote #${id} will be displayed here.</p>`;
-}
-
-document.getElementById("createQuoteButton").addEventListener("click", function() {
-    openTab(event, 'quote-draft');
-    document.getElementById("new-quote-box").style.display = "block";
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('/api/get-contact-info') // Assume this API checks if contact info exists
-      .then(response => response.json())
-      .then(data => {
-        if (!data.hasContactInfo) {
-          document.getElementById('contact-notification').style.display = 'block';
-        }
-      });
-  });
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const storePopup = document.getElementById('store-popup');
-    const storeNumberDisplay = document.getElementById('store-number');
-    const storeSelectButton = document.getElementById('store-select-button');
-
-    // Show store selection popup
-    storePopup.style.display = 'flex';
-
-    storeSelectButton.addEventListener('click', function() {
-        const storeNumberInput = document.getElementById('store-number-input').value;
-
-        // Display selected store number
-        storeNumberDisplay.textContent = `UR Store #${storeNumberInput}`;
-        
-        // Close the popup after selection
-        storePopup.style.display = 'none';
-    });
-
-    // Handle form submission for customer info
-    const customerInfoForm = document.getElementById('customer-info-form');
-    customerInfoForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        // Future integration with Sage100 will happen here
-        alert('Customer info has been saved. This will be linked to Sage100 in the future.');
-    });
-});

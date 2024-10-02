@@ -15,6 +15,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     .then(response => response.json())
     .then(data => {
         if (data.success) {
+            localStorage.setItem('userId', data.userId); // Store user ID
             window.location.href = 'customer_p.html'; // Redirect to customer portal
         } else {
             document.getElementById('error-message').innerText = data.message;

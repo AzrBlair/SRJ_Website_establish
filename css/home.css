@@ -4,8 +4,8 @@ body {
     padding: 0;
     text-align: center;
     overflow-x: hidden;
-    background: linear-gradient(to bottom right, #4d7818, rgb(255, 193, 193)), 
-                radial-gradient(circle at top left, rgba(255, 255, 255, 0.3), transparent 50%);
+    background: linear-gradient(to bottom right, #5b5b5b, rgb(0, 0, 0)), 
+                radial-gradient(circle at top left, rgba(0, 0, 0, 0.3), transparent 50%);
     background-blend-mode: overlay;
     height: 540vh;
     color: white;
@@ -120,4 +120,36 @@ nav a {
     color: rgb(190, 241, 255);
     text-decoration: none;
     cursor: pointer;
+}
+
+.search-bar {
+    position: relative; /* Keep relative positioning for suggestions alignment */
+    width: 300px; /* Control the width of the search bar */
+}
+
+#suggestions {
+    position: absolute;
+    top: 100%; /* Ensure suggestions are just below the search bar */
+    left: 0;
+    width: 100%; /* Set the width of suggestions to match the search bar */
+    background-color: white; /* White background for visibility */
+    border: 1px solid #ccc;
+    z-index: 1000; /* Ensure suggestions appear above other content */
+    max-height: 150px; /* Limit height to prevent a huge box */
+    overflow-y: auto; /* Scrollable if too many suggestions */
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    color: black; /* Make suggestion text black */
+}
+
+.suggestion-item:hover {
+    background-color: #f1f1f1; /* Highlight suggestion on hover */
+}
+
+#suggestions .suggestion-item:last-child {
+    border-bottom: none; /* Remove border for the last item */
 }

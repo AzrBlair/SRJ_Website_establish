@@ -1,26 +1,65 @@
-document.getElementById('searchForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const query = document.getElementById('searchQuery').value;
+// Function to fetch search suggestions dynamically as the user types
+document.getElementById('searchQuery').addEventListener('input', function() {
+    const query = this.value.trim();
 
-    fetch(/api/search?query=${query})
-        .then(response => response.json())
-        .then(data => {
-            const resultsContainer = document.getElementById('search-results');
-            resultsContainer.innerHTML = '';
+    if (query.length > 0) {
+        fetch(`/api/search?query=${encodeURIComponent(query)}`)
+            .then(response => {
+                if (!response.ok) {  // Check if the response status is OK (200)
+                    throw new Error(`Error: ${response.statusText}`);
+                }
+                return response.json();  // Try to parse JSON response
+            })
+            .then(data => {
+                if (Array.isArray(data) && data.length > 0) {
+                    displaySuggestions(data);
+                } else {
+                    clearSuggestions();  // Clear suggestions if none are found
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                clearSuggestions();  // Clear suggestions on error
+            });
+    } else {
+        clearSuggestions();  // Clear suggestions if the input is empty
+    }
+});
 
-            if (data.length === 0) {
-                resultsContainer.innerHTML = '<p>No results found</p>';
-            } else {
-                data.forEach(result => {
-                    const resultElement = document.createElement('div');
-                    resultElement.innerText = result.name; // Adjust according to your data structure
-                    resultsContainer.appendChild(resultElement);
-                });
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
+// Function to display search suggestions in real time
+function displaySuggestions(data) {
+    const suggestionsDiv = document.getElementById('suggestions');
+    suggestionsDiv.innerHTML = '';  // Clear previous suggestions
+
+    data.forEach(result => {
+        const suggestion = document.createElement('div');
+        suggestion.classList.add('suggestion-item');
+        suggestion.innerText = result.make_brand;  // Assuming 'make_brand' is the suggestion text
+        suggestion.addEventListener('click', function() {
+            // Redirect to search result page with the selected make
+            window.location.href = `search_result.html?query=${encodeURIComponent(result.make_brand)}`;
         });
+        suggestionsDiv.appendChild(suggestion);
+    });
+
+    suggestionsDiv.style.display = 'block';  // Show suggestions
+}
+
+// Function to clear suggestions
+function clearSuggestions() {
+    const suggestionsDiv = document.getElementById('suggestions');
+    suggestionsDiv.innerHTML = '';
+    suggestionsDiv.style.display = 'none';  // Hide suggestions
+}
+
+// Handle form submission to go to the search result page
+document.getElementById('searchForm').addEventListener('submit', function(event) {
+    event.preventDefault();  // Prevent form submission
+
+    const query = document.getElementById('searchQuery').value.trim();
+    if (query.length > 0) {
+        window.location.href = `search_result.html?query=${encodeURIComponent(query)}`;
+    }
 });
 
 

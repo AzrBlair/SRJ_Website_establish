@@ -1,0 +1,96 @@
+Skipping row with missing data in sheet Airman: model          NaN
+size     180x36x72
+Name: 1, dtype: object
+Skipping row with missing data in sheet Airman: model          NaN
+size     180x37x72
+Name: 4, dtype: object
+Skipping row with missing data in sheet Airman: model          NaN
+size     180x40x72
+Name: 6, dtype: object
+Skipping row with missing data in sheet Airman: model          NaN
+size     230x42x72
+Name: 12, dtype: object
+Skipping row with missing data in sheet Airman: model          NaN
+size     230x33x96
+Name: 22, dtype: object
+Skipping row with missing data in sheet Airman: model            NaN
+size     250x78x52.5
+Name: 24, dtype: object
+Skipping row with missing data in sheet Airman: model             NaN
+size     300x84x52.5N
+Name: 30, dtype: object
+Skipping row with missing data in sheet Aichi: model          NaN
+size     230x43x72
+Name: 1, dtype: object
+Skipping row with missing data in sheet Aichi: model          NaN
+size     200x42x72
+Name: 4, dtype: object
+Skipping row with missing data in sheet Aichi: model          NaN
+size     230x48x72
+Name: 6, dtype: object
+Skipping row with missing data in sheet Aichi: model          NaN
+size     200x49x72
+Name: 8, dtype: object
+Skipping row with missing data in sheet Aichi: model          NaN
+size     230x50x72
+Name: 10, dtype: object
+Skipping row with missing data in sheet Aichi: model          NaN
+size     230x56x72
+Name: 13, dtype: object
+Skipping row with missing data in sheet Astec: model             NaN
+size     400x74x72.5W
+Name: 1, dtype: object
+Skipping row with missing data in sheet Astec: model             NaN
+size     400x74x72.5W
+Name: 2, dtype: object
+Skipping row with missing data in sheet Astec: model             NaN
+size     400x74x72.5W
+Name: 4, dtype: object
+Skipping row with missing data in sheet Astec: model             NaN
+size     400x74x72.5W
+Name: 5, dtype: object
+Skipping row with missing data in sheet Astec: model          NaN
+size     280x56x72
+Name: 7, dtype: object
+Skipping row with missing data in sheet Astec: model          NaN
+size     450x92x71
+Name: 10, dtype: object
+Skipping row with missing data in sheet Astec: model          NaN
+size     450x92x71
+Name: 11, dtype: object
+Skipping row with missing data in sheet Atlas: model          NaN
+size     180x41x72
+Name: 4, dtype: object
+Skipping row with missing data in sheet Atlas: model          NaN
+size     230x33x96
+Name: 6, dtype: object
+Skipping row with missing data in sheet ASV+Terex: model                NaN
+size     280x37x101.6SNX
+Name: 4, dtype: object
+Skipping row with missing data in sheet ASV+Terex: model                NaN
+size     381x42x100.5TNS
+Name: 11, dtype: object
+Skipping row with missing data in sheet ASV+Terex: model                NaN
+size     381x51x100.5TNS
+Name: 13, dtype: object
+Skipping row with missing data in sheet ASV+Terex: model          NaN
+size     320x53x86
+Name: 15, dtype: object
+Skipping row with missing data in sheet ASV+Terex: model                NaN
+size     457x50x101.6TNS
+Name: 20, dtype: object
+Skipping row with missing data in sheet ASV+Terex: model                NaN
+size     457x50x101.6TPS
+Name: 23, dtype: object
+Skipping row with missing data in sheet ASV+Terex: model              NaN
+size     457x51x101TCS
+Name: 25, dtype: object
+Skipping row with missing data in sheet ASV+Terex: model           NaN
+size     457x56x102
+Name: 28, dtype: object
+Skipping row with missing data in sheet Bandit: model             NaN
+size     300x84x52.5W
+Name: 2, dtype: object
+Skipping row with missing data in sheet Bandit: model          NaN
+size     180x35x60
+Name: 4, dtype: object
