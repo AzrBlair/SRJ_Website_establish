@@ -1,106 +1,55 @@
-// Function to fetch search suggestions dynamically as the user types
-document.getElementById('searchQuery').addEventListener('input', function() {
-    const query = this.value.trim();
-
-    if (query.length > 0) {
-        fetch(`/api/search?query=${encodeURIComponent(query)}`)
-            .then(response => {
-                if (!response.ok) {  // Check if the response status is OK (200)
-                    throw new Error(`Error: ${response.statusText}`);
-                }
-                return response.json();  // Try to parse JSON response
-            })
-            .then(data => {
-                if (Array.isArray(data) && data.length > 0) {
-                    displaySuggestions(data);
-                } else {
-                    clearSuggestions();  // Clear suggestions if none are found
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                clearSuggestions();  // Clear suggestions on error
-            });
-    } else {
-        clearSuggestions();  // Clear suggestions if the input is empty
-    }
+// Fetch suggestions for Machine Make
+document.getElementById('makeSearchQuery').addEventListener('input', function() {
+    fetchSuggestions(this.value, 'MMake', 'makeSuggestions');
 });
 
-// Function to display search suggestions in real time
-function displaySuggestions(data) {
-    const suggestionsDiv = document.getElementById('suggestions');
+// Fetch suggestions for Machine Model
+document.getElementById('modelSearchQuery').addEventListener('input', function() {
+    fetchSuggestions(this.value, 'MModel', 'modelSuggestions');
+});
+
+// Handle dropdown button click for Machine Make
+document.getElementById('makeDropdownButton').addEventListener('click', function() {
+    fetchSuggestions('', 'MMake', 'makeSuggestions'); // Empty string to fetch all makes
+});
+
+// Handle dropdown button click for Machine Model
+document.getElementById('modelDropdownButton').addEventListener('click', function() {
+    fetchSuggestions('', 'MModel', 'modelSuggestions'); // Empty string to fetch all models
+});
+
+// Fetch suggestions from the database
+function fetchSuggestions(query, field, suggestionsDivId) {
+    fetch(`/api/search?field=${field}&query=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => displaySuggestions(data, suggestionsDivId, field))
+        .catch(error => console.error('Error:', error));
+}
+
+// Display suggestions for either Machine Make or Machine Model
+function displaySuggestions(data, suggestionsDivId, field) {
+    const suggestionsDiv = document.getElementById(suggestionsDivId);
     suggestionsDiv.innerHTML = '';  // Clear previous suggestions
 
-    data.forEach(result => {
+    data.forEach(item => {
         const suggestion = document.createElement('div');
         suggestion.classList.add('suggestion-item');
-        suggestion.innerText = result.make_brand;  // Assuming 'make_brand' is the suggestion text
+        suggestion.innerText = item[field];
         suggestion.addEventListener('click', function() {
-            // Redirect to search result page with the selected make
-            window.location.href = `search_result.html?query=${encodeURIComponent(result.make_brand)}`;
+            // Set the input value to the selected suggestion
+            document.getElementById(field === 'MMake' ? 'makeSearchQuery' : 'modelSearchQuery').value = item[field];
+            suggestionsDiv.style.display = 'none'; // Hide suggestions on selection
         });
         suggestionsDiv.appendChild(suggestion);
     });
 
-    suggestionsDiv.style.display = 'block';  // Show suggestions
+    suggestionsDiv.style.display = 'block'; // Show suggestions
 }
 
-// Function to clear suggestions
-function clearSuggestions() {
-    const suggestionsDiv = document.getElementById('suggestions');
-    suggestionsDiv.innerHTML = '';
-    suggestionsDiv.style.display = 'none';  // Hide suggestions
-}
-
-// Handle form submission to go to the search result page
-document.getElementById('searchForm').addEventListener('submit', function(event) {
-    event.preventDefault();  // Prevent form submission
-
-    const query = document.getElementById('searchQuery').value.trim();
-    if (query.length > 0) {
-        window.location.href = `search_result.html?query=${encodeURIComponent(query)}`;
+// Hide suggestions when clicking outside of the search bar
+document.addEventListener('click', function(event) {
+    if (!event.target.closest('.search-bar')) {
+        document.getElementById('makeSuggestions').style.display = 'none';
+        document.getElementById('modelSuggestions').style.display = 'none';
     }
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const gifLinks = document.querySelectorAll('.gif-link');
-    const popups = document.querySelectorAll('.video-popup');
-    const closeButtons = document.querySelectorAll('.close');
-
-    gifLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const target = this.getAttribute('href');
-            const popup = document.querySelector(target);
-            popup.style.display = 'flex';
-
-            // Start video playback when pop-up is shown
-            const video = popup.querySelector('video');
-            video.play();
-        });
-    });
-
-    closeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const popup = this.closest('.video-popup');
-            popup.style.display = 'none';
-
-            // Pause video playback when pop-up is closed
-            const video = popup.querySelector('video');
-            video.pause();
-        });
-    });
-
-    window.addEventListener('click', function(event) {
-        popups.forEach(popup => {
-            if (event.target == popup) {
-                popup.style.display = 'none';
-
-                // Pause video playback when clicking outside the video
-                const video = popup.querySelector('video');
-                video.pause();
-            }
-        });
-    });
 });

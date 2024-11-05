@@ -4,7 +4,7 @@ body {
     padding: 0;
     text-align: center;
     overflow-x: hidden;
-    background: linear-gradient(to bottom right, #5b5b5b, rgb(0, 0, 0)), 
+    background: linear-gradient(to bottom right, #fff9e5, rgb(255, 248, 223)), 
                 radial-gradient(circle at top left, rgba(0, 0, 0, 0.3), transparent 50%);
     background-blend-mode: overlay;
     height: 540vh;
@@ -122,9 +122,58 @@ nav a {
     cursor: pointer;
 }
 
+.search-container {
+    display: flex;
+    justify-content: center;
+    gap: 2em; /* Space between the two search sections */
+    margin-top: 3em;
+}
+
+.search-section {
+    text-align: center;
+}
+
+.search-section h2 {
+    font-size: 1.5em;
+    color: #3c8c8c; /* Adjust color as needed */
+    margin-bottom: 0.5em;
+}
+
 .search-bar {
-    position: relative; /* Keep relative positioning for suggestions alignment */
-    width: 300px; /* Control the width of the search bar */
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.search-bar input {
+    width: 75%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.search-bar button {
+    background-color: #3c8c8c;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.search-bar button:first-of-type {
+    border-right: 1px solid #eee; /* Divider between dropdown and search icon */
+    margin: 0; /* Remove any default margin */
 }
 
 #suggestions {

@@ -97,19 +97,28 @@
     </div>
 
     <div class="search-container">
-        <form id="searchForm">
-            <label for="searchQuery" class="search-label">What are you looking for:</label>
-            <div class="search-bar">
-                <input type="text" id="searchQuery" name="searchQuery" required autocomplete="off">
-                <div id="suggestions" class="suggestions"></div> <!-- Suggestions will appear here -->
-                <button type="submit">Search</button>
-            </div>
-        </form>
-    </div>
-
-        <div id="search-results"></div>
-    </div>
-    <div class="content">
+        <div class="search-section">
+            <h2>Machine Make</h2>
+            <form id="makeSearchForm">
+                <div class="search-bar">
+                    <input type="text" id="makeSearchQuery" name="makeSearchQuery" placeholder="Search..." autocomplete="off">
+                    <button type="button" id="makeDropdownButton">&#9660;</button>
+                    <button type="submit">&#128269;</button>
+                    <div id="makeSuggestions" class="suggestions"></div>
+                </div>
+            </form>
+        </div>
+        <div class="search-section">
+            <h2>Machine Model</h2>
+            <form id="modelSearchForm">
+                <div class="search-bar">
+                    <input type="text" id="modelSearchQuery" name="modelSearchQuery" placeholder="Search..." autocomplete="off">
+                    <button type="button" id="modelDropdownButton">&#9660;</button>
+                    <button type="submit">&#128269;</button>
+                    <div id="modelSuggestions" class="suggestions"></div>
+                </div>
+            </form>
+        </div>
     </div>
     <script src="js/home.js"></script>
 </body>
