@@ -122,6 +122,8 @@ nav a {
     cursor: pointer;
 }
 
+/* ////////////////////////////////////////////////////////search bar///////////////////////////////////////////////////////////////// */
+
 .search-container {
     display: flex;
     justify-content: center;
@@ -134,41 +136,54 @@ nav a {
 }
 
 .search-section h2 {
-    font-size: 1.5em;
+    font-size: 1.2em;
     color: #3c8c8c; /* Adjust color as needed */
     margin-bottom: 0.5em;
 }
-
+.search-bar-wrapper {
+    position: relative; /* Position relative for absolute positioning of suggestions */
+}
 .search-bar {
+    position: relative;
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;
-    width: 300px;
-    box-sizing: border-box;
+    width: 250px;
+    margin-bottom: 1em;
 }
 
 .search-bar input {
-    width: 75%;
+    width: 100%;
     padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
     border: none;
     outline: none;
-    box-sizing: border-box;
 }
 
 .search-bar button {
     background-color: #3c8c8c;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     border: none;
     padding: 10px;
     cursor: pointer;
+}
+
+.main-search-button {
+    width: 250px; /* Match the width of the input fields */
+    padding: 10px;
+    font-size: 14px;
+    background-color: #3c8c8c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 2em auto;
     display: flex;
-    align-items: center;
     justify-content: center;
-    box-sizing: border-box;
+    align-items: center;
 }
 
 .search-bar button:first-of-type {
@@ -176,23 +191,26 @@ nav a {
     margin: 0; /* Remove any default margin */
 }
 
-#suggestions {
-    position: absolute;
-    top: 100%; /* Ensure suggestions are just below the search bar */
+.suggestions {
+    position: absolute; /* Position absolute within search-bar-wrapper */
+    top: 100%; /* Place directly below the input field */
     left: 0;
-    width: 100%; /* Set the width of suggestions to match the search bar */
-    background-color: white; /* White background for visibility */
+    background-color: white;
+    width: 100%; /* Match the width of the input field */
     border: 1px solid #ccc;
-    z-index: 1000; /* Ensure suggestions appear above other content */
-    max-height: 150px; /* Limit height to prevent a huge box */
-    overflow-y: auto; /* Scrollable if too many suggestions */
+    max-height: 150px; /* Show 5 suggestions with scrolling */
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none; /* Initially hidden */
 }
 
 .suggestion-item {
     padding: 10px;
     cursor: pointer;
+    color: black;
     border-bottom: 1px solid #eee;
-    color: black; /* Make suggestion text black */
+    text-indent: -20%; /* Shift text 20% to the left */
 }
 
 .suggestion-item:hover {

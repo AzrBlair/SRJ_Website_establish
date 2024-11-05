@@ -21,22 +21,39 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'home.html'));
 });
 
-// API for fetching suggestions based on Machine Make or Model
-app.get('/api/search', (req, res) => {
-    const field = req.query.field;
-    const query = req.query.query ? `%${req.query.query}%` : '%';
+// // API endpoint to fetch unique Machine Makes (MMake) and Machine Models (MModel)
+// app.get('/api/search', (req, res) => {
+//     const field = req.query.field;
+//     console.log(`Received request to fetch unique values for field: ${field}`); // Log request field
 
-    if (field === 'MMake' || field === 'MModel') {
-        db.all(`SELECT DISTINCT ${field} FROM machines WHERE ${field} LIKE ?`, [query], (err, rows) => {
-            if (err) {
-                res.status(500).send('Database error');
-            } else {
-                res.json(rows);
-            }
-        });
-    } else {
-        res.status(400).send('Invalid search field');
-    }
+//     if (field === 'MMake' || field === 'MModel') {
+//         db.all(`SELECT DISTINCT ${field} FROM machines`, [], (err, rows) => {
+//             if (err) {
+//                 console.error('Database error:', err.message);
+//                 res.status(500).send('Database error');
+//             } else {
+//                 console.log(`Fetched ${rows.length} unique values for field ${field}:`, rows); // Log results
+//                 res.json(rows);
+//             }
+//         });
+//     } else {
+//         console.error('Invalid search field:', field); // Log invalid field request
+//         res.status(400).send('Invalid search field');
+//     }
+// });
+
+// Endpoint to fetch suggestions for Machine Make or Model based on input
+app.get('/api/search-suggestions', (req, res) => {
+    const query = `%${req.query.query}%`;
+    const field = req.query.field === 'MMake' ? 'MMake' : 'MModel';
+    db.all(`SELECT DISTINCT ${field} AS name FROM machines WHERE ${field} LIKE ? ORDER BY name ASC`, [query], (err, rows) => {
+        if (err) {
+            console.error('Database error:', err.message);
+            res.status(500).send('Database error');
+        } else {
+            res.json(rows);
+        }
+    });
 });
 
 // Start the server
