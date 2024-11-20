@@ -21,32 +21,80 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'home.html'));
 });
 
-// // API endpoint to fetch unique Machine Makes (MMake) and Machine Models (MModel)
-// app.get('/api/search', (req, res) => {
-//     const field = req.query.field;
-//     console.log(`Received request to fetch unique values for field: ${field}`); // Log request field
+// API endpoint to fetch unique Machine Makes (MMake) and Machine Models (MModel)
+app.get('/api/search', (req, res) => {
+    const field = req.query.field;
+    console.log(`Received request to fetch unique values for field: ${field}`); // Log request field
 
-//     if (field === 'MMake' || field === 'MModel') {
-//         db.all(`SELECT DISTINCT ${field} FROM machines`, [], (err, rows) => {
-//             if (err) {
-//                 console.error('Database error:', err.message);
-//                 res.status(500).send('Database error');
-//             } else {
-//                 console.log(`Fetched ${rows.length} unique values for field ${field}:`, rows); // Log results
-//                 res.json(rows);
-//             }
-//         });
-//     } else {
-//         console.error('Invalid search field:', field); // Log invalid field request
-//         res.status(400).send('Invalid search field');
-//     }
-// });
+    if (field === 'MMake' || field === 'MModel') {
+        db.all(`SELECT DISTINCT ${field} FROM machines`, [], (err, rows) => {
+            if (err) {
+                console.error('Database error:', err.message);
+                res.status(500).send('Database error');
+            } else {
+                console.log(`Fetched ${rows.length} unique values for field ${field}:`, rows); // Log results
+                res.json(rows);
+            }
+        });
+    } else {
+        console.error('Invalid search field:', field); // Log invalid field request
+        res.status(400).send('Invalid search field');
+    }
+});
 
 // Endpoint to fetch suggestions for Machine Make or Model based on input
 app.get('/api/search-suggestions', (req, res) => {
-    const query = `%${req.query.query}%`;
+    const query = req.query.query ? `%${req.query.query}%` : '%'; // Use '%' if query is empty
     const field = req.query.field === 'MMake' ? 'MMake' : 'MModel';
-    db.all(`SELECT DISTINCT ${field} AS name FROM machines WHERE ${field} LIKE ? ORDER BY name ASC`, [query], (err, rows) => {
+    const makeCondition = req.query.make ? 'AND MMake = ?' : '';
+    const params = req.query.make ? [req.query.make, query] : [query];
+
+    const sql = `
+        SELECT DISTINCT ${field} AS name 
+        FROM machines 
+        WHERE ${field} LIKE ? ${makeCondition}
+        ORDER BY name ASC
+    `;
+    
+    db.all(sql, params, (err, rows) => {
+        if (err) {
+            console.error('Database error:', err.message);
+            res.status(500).send('Database error');
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
+// Endpoint to fetch models based on machine make
+app.get('/api/models', (req, res) => {
+    const make = req.query.make;
+    if (!make) {
+        return res.status(400).send('Make parameter is required');
+    }
+
+    const query = `SELECT DISTINCT MModel AS model FROM machines WHERE MMake = ? ORDER BY model ASC`;
+    db.all(query, [make], (err, rows) => {
+        if (err) {
+            console.error('Database error:', err.message);
+            res.status(500).send('Database error');
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
+// Endpoint to fetch sizes based on machine make and model
+app.get('/api/sizes', (req, res) => {
+    const make = req.query.make;
+    const model = req.query.model;
+
+    if (!make || !model) {
+        return res.status(400).send('Make and model parameters are required');
+    }
+
+    const query = `SELECT DISTINCT Tsize AS size FROM machines WHERE MMake = ? AND MModel = ? ORDER BY size ASC`;
+    db.all(query, [make, model], (err, rows) => {
         if (err) {
             console.error('Database error:', err.message);
             res.status(500).send('Database error');

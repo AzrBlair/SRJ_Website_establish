@@ -1,3 +1,4 @@
+
 // Function to fetch unique Machine Makes when the Machine Make dropdown is clicked
 document.getElementById('makeDropdownButton').addEventListener('click', function() {
     fetchUniqueValues('MMake', 'makeSuggestions');
@@ -52,14 +53,14 @@ document.getElementById('mainSearchButton').addEventListener('click', function()
     const makeQuery = document.getElementById('makeSearchQuery').value.trim();
     const modelQuery = document.getElementById('modelSearchQuery').value.trim();
 
-    // Redirect to search result based on the provided input
-    if (makeQuery) {
-        window.location.href = `search_result.html?make=${encodeURIComponent(makeQuery)}`;
-    } else if (modelQuery) {
-        window.location.href = `search_result.html?model=${encodeURIComponent(modelQuery)}`;
-    } else {
-        alert('Please enter a Machine Make or Machine Model to search.');
+    // Determine the URL based on input fields
+    let url = `search_result.html?make=${encodeURIComponent(makeQuery)}`;
+    if (modelQuery) {
+        url += `&model=${encodeURIComponent(modelQuery)}`;
     }
+
+    // Redirect to the search result page with the appropriate parameters
+    window.location.href = url;
 });
 
 // Hide suggestions when clicking outside of the search bar
@@ -112,4 +113,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+});
+
+document.getElementById('mainSearchButton').addEventListener('click', function() {
+    const makeQuery = document.getElementById('makeSearchQuery').value.trim();
+    const modelQuery = document.getElementById('modelSearchQuery').value.trim();
+
+    // Determine the URL based on input fields
+    let url = `search_result.html?make=${encodeURIComponent(makeQuery)}`;
+    if (modelQuery) {
+        url += `&model=${encodeURIComponent(modelQuery)}`;
+    }
+
+    // Redirect to the search result page with the appropriate parameters
+    window.location.href = url;
 });

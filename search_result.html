@@ -7,17 +7,33 @@
     <link rel="stylesheet" href="css/search_result.css">
 </head>
 <body>
-    <header>
-        <h1>Search Results</h1>
-    </header>
-
-    <!-- Container for displaying models -->
-    <div id="search-results">
-        <h2>Models</h2>
-        <div id="models-container"></div> <!-- This will display the models -->
-
-        <h2>Sizes</h2>
-        <div id="sizes-container"></div> <!-- This will display the sizes -->
+    <div class="container">
+        <!-- Left section: Make and Model dropdowns -->
+        <div class="left-section">
+            <h2>Machine Make</h2>
+            <div class="dropdown-wrapper">
+                <div class="dropdown">
+                    <input type="text" id="makeDropdown" placeholder="Select Make" autocomplete="off">
+                    <button class="dropdown-button" onclick="toggleSuggestions('makeSuggestions', makeDropdown)">&#9662;</button>
+                </div>
+                <div id="makeSuggestions" class="suggestions"></div>
+            </div>
+        
+            <h2>Machine Model</h2>
+            <div class="dropdown-wrapper">
+                <div class="dropdown">
+                    <input type="text" id="modelDropdown" placeholder="Select Model" autocomplete="off">
+                    <button class="dropdown-button" onclick="toggleSuggestions('modelSuggestions', modelDropdown)">&#9662;</button>
+                </div>
+                <div id="modelSuggestions" class="suggestions"></div>
+            </div>
+        </div>
+        
+        <!-- Right section: Display sizes -->
+        <div class="right-section">
+            <h2>Size</h2>
+            <div id="sizeList" class="size-list"></div>
+        </div>
     </div>
 
     <script src="js/search_result.js"></script>
