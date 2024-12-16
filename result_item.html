@@ -24,8 +24,16 @@
 
         <!-- Main Product Section -->
         <div class="product-section">
-            <!-- Product Image -->
-            <div class="product-img">Product Image</div>
+            <!-- Product Images Section -->
+            <div class="product-images-container">
+                <div id="product-images" class="product-images">
+                    <!-- Dynamically loaded images will be placed here -->
+                </div>
+                <!-- Dots for navigation -->
+                <div id="dots" class="dots">
+                    <!-- Dynamically generated dots -->
+                </div>
+            </div>
             
             <!-- Product Details -->
             <div class="product-details">
@@ -33,17 +41,37 @@
                     <span id="dynamic-model">Model Loading...</span> - 
                     <span id="dynamic-size">Size Loading...</span>
                 </h2>
-                <p class="short-description" id="dynamic-description">Short description is loading...</p>
-                <div class="product-thumbnails">
-                    <img src="thumb1.jpg" alt="Thumbnail 1">
-                    <img src="thumb2.jpg" alt="Thumbnail 2">
-                    <img src="thumb3.jpg" alt="Thumbnail 3">
+
+                <!-- Inventory Status Grid -->
+                <div class="inventory-status">
+                    <h2 class="inventory-title">Inventory Status</h2>
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>IL</th>
+                                <th>GA</th>
+                                <th>TX</th>
+                                <th>CA</th>
+                                <th>Water</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <p class="short-description" id="dynamic-description">Short description is loading...</p>
                 <button id="addQuoteButton">Add to Quote</button>
             </div>
         </div>
     </div>
-    
+
     <!-- More Details -->
     <div class="more-details">
         <h2>Detailed Product Description</h2>
@@ -52,46 +80,6 @@
         </p>
     </div>
     
-    <script>
-        // JavaScript to dynamically update the page content and back link
-        document.addEventListener("DOMContentLoaded", () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const make = urlParams.get('make');
-            const model = urlParams.get('model');
-            const size = urlParams.get('size');
-            const sizes = urlParams.get('sizes') ? urlParams.get('sizes').split(',') : [];
-
-            // Update placeholders with dynamic data
-            document.getElementById("dynamic-make").innerText = make || "Unknown Make";
-            document.getElementById("dynamic-model").innerText = model || "Unknown Model";
-            document.getElementById("dynamic-size").innerText = size || "Unknown Size";
-            document.getElementById("dynamic-description").innerText = 
-                `Short description of the ${make || "Make"} ${model || "Model"} (${size || "Size"}) goes here.`;
-            document.getElementById("dynamic-details").innerText = 
-                `Need all detailed description of the ${make || "Make"} ${model || "Model"} (${size || "Size"}). Include specifications, features, and other relevant information about the item.`;
-
-            // Populate size list in the sidebar
-            const sizeList = document.getElementById("size-list");
-            sizeList.innerHTML = ""; // Clear the list
-            sizes.forEach((sizeItem) => {
-                const listItem = document.createElement("li");
-                listItem.innerText = decodeURIComponent(sizeItem);
-                listItem.addEventListener("click", () => {
-                    // Redirect to the same page with the selected size
-                    const url = `result_item.html?make=${encodeURIComponent(make)}&model=${encodeURIComponent(model)}&size=${encodeURIComponent(sizeItem)}&sizes=${sizes.join(',')}`;
-                    window.location.href = url;
-                });
-                sizeList.appendChild(listItem);
-            });
-
-            // Update the "Back to Search Results" link
-            const backToSearch = document.getElementById("back-to-search");
-            if (make && model) {
-                backToSearch.href = `search_result.html?make=${encodeURIComponent(make)}&model=${encodeURIComponent(model)}`;
-            } else {
-                backToSearch.href = "search_result.html";
-            }
-        });
-    </script>
+    <script src="js/result_item.js"></script>
 </body>
 </html>

@@ -5,49 +5,33 @@ from google.oauth2.service_account import Credentials
 from google.cloud import storage  # Import storage for downloading credentials
 import traceback
 
-# Function to download credentials from Google Cloud Storage
 def download_credentials():
     try:
         print("Downloading credentials from Cloud Storage...")
         client = storage.Client()
-        bucket = client.get_bucket('srj_website_database_credentials')  # Replace with your bucket name
+        bucket = client.get_bucket('srj_website_database_credentials')  # Replace with srj bucket name
         blob = bucket.blob('credentials.json')
-        blob.download_to_filename('/tmp/credentials.json')  # Download to /tmp for use in Cloud Functions
+        blob.download_to_filename('credentials.json')  
         print("Credentials downloaded successfully.")
-        return '/tmp/credentials.json'
+        return 'credentials.json'
     except Exception as e:
         print("Error downloading credentials:", e)
         traceback.print_exc()
         return None
 
-# Set up Google Sheets API credentials with correct scopes
 def get_sheet_data(sheet_id, sheet_name):
     try:
         print("Fetching data from Google Sheets...")
-        # Download the credentials from Cloud Storage
-        credentials_path = download_credentials()
-        if not credentials_path:
-            print("Failed to download credentials.")
-            return None
-        
-        # Define the correct scopes for Google Sheets and Google Drive access
         SCOPES = [
             'https://www.googleapis.com/auth/spreadsheets',
             'https://www.googleapis.com/auth/drive'
         ]
-
-        # Load credentials with the specified scopes
-        creds = Credentials.from_service_account_file(credentials_path, scopes=SCOPES)
+        creds = Credentials.from_service_account_file('credentials.json', scopes=SCOPES)
         client = gspread.authorize(creds)
-
-        # Access the Google Sheet using its ID
         sheet = client.open_by_key(sheet_id).worksheet(sheet_name)
-        
-        # Debugging print statement
         print(f"Successfully accessed worksheet: {sheet_name}")
-        
         data = sheet.get_all_values()
-        headers = data[0]  # Assuming first row is header
+        headers = data[0]  # First row is header
         rows = data[1:]    # Rest is data
         return pd.DataFrame(rows, columns=headers)
     except Exception as e:
@@ -55,68 +39,110 @@ def get_sheet_data(sheet_id, sheet_name):
         traceback.print_exc()
         return None
 
-# Main function for Google Cloud Function
+def format_image_links(data):
+    """
+    Format the ImageLink column to match the correct format.
+    """
+    try:
+        print("Formatting ImageLink column...")
+        if 'ImageLink' in data.columns:
+            data['ImageLink'] = data['ImageLink'].apply(lambda x: ','.join(
+                [link.replace('https://storage.cloud.google.com', 'https://storage.googleapis.com') for link in x.split(',')] if isinstance(x, str) else []
+            ))
+            print("ImageLink column formatted successfully.")
+        else:
+            print("ImageLink column not found in data.")
+    except Exception as e:
+        print("Error formatting ImageLink column:", e)
+        traceback.print_exc()
+
 def update_database(request=None):
     print("Cloud Function triggered. Starting database update...")
     try:
-        # Google Sheet information
+        # Machines table update
         sheet_id = "1IvpK5kNDyWfB5HE8BajiU1NWJCuWEf5vP4qinitD_s8"
         sheet_name = "Test_CAT"
-        
-        # Load data from Google Sheets
+
+        # Load data from Google Sheets for machines
         data = get_sheet_data(sheet_id, sheet_name)
         if data is None:
             print("Failed to fetch data from Google Sheets.")
             return "Data could not be loaded from Google Sheets.", 500
 
         print("Data fetched successfully:")
-        print(data.head())  # Debugging: Print the first few rows
+        print(data.head())
 
         # Clean and format data
-        data.columns = ['MMake', 'MModel', 'Tsize']
+        data.columns = ['MMake', 'MModel', 'Tsize', 'Thread', 'ImageLink']
         data.drop_duplicates(inplace=True)
 
-        # Connect to SQLite database (or create it if it doesn't exist)
+        # Format the ImageLink column
+        format_image_links(data)
+
+        # Connect to SQLite database
         print("Connecting to SQLite database...")
-        conn = sqlite3.connect('/tmp/MMM_db.db')  # Use /tmp directory in cloud functions
+        conn = sqlite3.connect('MMM_db.db')  
         cursor = conn.cursor()
 
-        # Create table if it doesn't exist
+        # Drop the old table
+        print("Dropping old 'machines' table (if exists)...")
+        cursor.execute('DROP TABLE IF EXISTS machines')
+        conn.commit()
+
+        # Create new table with ImageLink column
+        print("Creating new 'machines' table...")
         cursor.execute('''
-            CREATE TABLE IF NOT EXISTS machines (
+            CREATE TABLE machines (
                 MMake TEXT,
                 MModel TEXT,
                 Tsize TEXT,
-                PRIMARY KEY (MMake, MModel, Tsize)
+                Thread TEXT,
+                ImageLink TEXT,
+                PRIMARY KEY (MMake, MModel, Tsize, Thread)
             )
         ''')
-        print("Database table ensured.")
+        print("New table created.")
 
-        # Load existing data in database
-        existing_data = pd.read_sql_query("SELECT * FROM machines", conn)
-        print("Existing data in database:")
-        print(existing_data)
+        # Insert new data into the database
+        print("Inserting new data into 'machines' table...")
+        data.to_sql('machines', conn, if_exists='append', index=False)
 
-        # Find new rows to add
-        new_rows = data[~data.isin(existing_data)].dropna()
-        print("New rows to add:")
-        print(new_rows)
+        # Category table update
+        category_sheet_name = "Category"  # Sheet name for the Category table
 
-        # Find rows to delete
-        rows_to_delete = existing_data[~existing_data.isin(data)].dropna()
-        print("Rows to delete:")
-        print(rows_to_delete)
+        # Load data from Google Sheets for categories
+        category_data = get_sheet_data(sheet_id, category_sheet_name)
+        if category_data is None:
+            print("Failed to fetch category data from Google Sheets.")
+            return "Category data could not be loaded from Google Sheets.", 500
 
-        # Insert new rows
-        new_rows.to_sql('machines', conn, if_exists='append', index=False)
+        print("Category data fetched successfully:")
+        print(category_data.head())
 
-        # Delete rows that are no longer in the Excel file
-        for index, row in rows_to_delete.iterrows():
-            cursor.execute('DELETE FROM machines WHERE MMake=? AND MModel=? AND Tsize=?', 
-                           (row['MMake'], row['MModel'], row['Tsize']))
+        # Clean and format category data
+        category_data.columns = ['C_name']
+        category_data.drop_duplicates(inplace=True)
 
-        conn.commit()  # Save changes
-        conn.close()   # Close database connection
+        # Drop the old Category table
+        print("Dropping old 'Category' table (if exists)...")
+        cursor.execute('DROP TABLE IF EXISTS Category')
+        conn.commit()
+
+        # Create new Category table
+        print("Creating new 'Category' table...")
+        cursor.execute('''
+            CREATE TABLE Category (
+                C_name TEXT PRIMARY KEY
+            )
+        ''')
+        print("New 'Category' table created.")
+
+        # Insert new category data into the database
+        print("Inserting new data into 'Category' table...")
+        category_data.to_sql('Category', conn, if_exists='append', index=False)
+
+        conn.commit()
+        conn.close()
 
         print("Database update done.")
         return "Database update done", 200
@@ -125,7 +151,6 @@ def update_database(request=None):
         traceback.print_exc()
         return str(e), 500
 
-# Local testing
 if __name__ == "__main__":
     print("Running locally...")
     update_database(None)
