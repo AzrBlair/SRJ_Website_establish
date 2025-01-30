@@ -4,142 +4,465 @@ body {
     padding: 0;
     text-align: center;
     overflow-x: hidden;
-    background: linear-gradient(to bottom right, #fff9e5, rgb(255, 248, 223)), 
-                radial-gradient(circle at top left, rgba(0, 0, 0, 0.3), transparent 50%);
+    background: rgb(255, 255, 255);
     background-blend-mode: overlay;
     height: auto;
-    color: white;
+    padding-top: 50px; /* Space between video and header */
+    
 }
 
+.main-container {
+    width: 1100px; /* Fixed width for your content */
+    text-align: center; /* Align text/content inside to the center */
+    margin: 0 auto; /* Center the content horizontally */
+    position: relative;
+    background-color: #fff;
+    box-sizing: border-box;  
+}
+
+/* General Header Styling */
 header {
-    background-color: #000000;
-    color: white;
-    padding: 1em;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+    background-color: #000; /* Keep the black background */
+    color: white; /* White text color */
+    padding: 0.1em; /* Reduce padding of the header to keep it compact */
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+    width: 100%; /* Maintain full width */
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+/* SRJ, Inc. Branding */
+.title {
+    display: flex; /* Aligns content horizontally */
+    align-items: center; /* Vertically centers the content */
+    height: 100%; /* Matches the height of the header */
+    margin: 0; /* Ensures no space around */
+    padding: 0; /* Removes padding */
+}
+.title img {
+    height: 100%; /* Ensures the image's height matches the header's height */
+    max-height: 100%; /* Prevents the image from overflowing the header */
+}
+.title-logo {
+    width: 50px; /* Adjust width of the image */
+    height: auto; /* Maintain aspect ratio */
 }
 
+/* Navigation bar styling */
 nav {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: nowrap; /* Prevent wrapping */
-}
-
-nav a {
-    color: white;
-    margin: 0 1em;
-    text-decoration: none;
-}
-
-.scroll-container {
-    position: relative;
-    height: 300px; /* Adjust height based on your content */
-    overflow: hidden; /* Hide overflow to only show scrolling GIFs */
     display: flex;
     align-items: center;
 }
 
-.gif-container {
+/* Compact Menu Items */
+.menu {
+    list-style: none;
     display: flex;
-    animation: scroll 10s linear infinite; /* Adjust the speed */
+    gap: 0px; /* Reduce space between items for compact design */
+    padding: 0;
+    margin: 0;
 }
 
-@keyframes scroll {
-    0% {
-        transform: translateX(0%);
-    }
-    100% {
-        transform: translateX(-50%); /* Move by half of the container width */
-    }
+/* Individual Menu Item */
+.menu > li {
+    position: relative;
 }
 
-.gif-item {
-    flex: 0 0 auto; /* Prevent flexbox from adjusting the size */
-    margin: 0; /* Remove margins to eliminate gaps */
+.menu > li > a {
+    text-decoration: none;
+    color: white; /* Default white text */
+    padding: 10px 15px; /* Padding for clickable area */
+    font-size: 0.8rem; /* Adjusted font size for compact design */
+    font-family: 'Arial Black', Arial, sans-serif; /* Set font-family */
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Combined transitions */
+    text-transform: uppercase;
+    white-space: nowrap; /* Prevent wrapping */
+    display: inline-block; /* Ensure proper spacing */
 }
 
-.gif-container img {
-    width: 400px; /* Adjust size as needed */
-    height: 200px; /* Adjust size as needed */
-    cursor: pointer;
+/* Hover Effect */
+.menu > li > a:hover {
+    background-color: #931f15; /* Highlight background */
+    transform: scale(1.1);
+    color: white; /* Change text to white */
+
 }
 
-.gif-description {
-    margin-top: 5px; /* Space between GIF and description */
-    font-size: 14px; /* Adjust as needed */
+
+/* Dropdown Menu */
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #931f15; /* Background color for dropdown */
+    padding: 10px 0;
+    list-style: none;
+
+    z-index: 1000;
+    width: max-content;
+}
+
+.dropdown li {
+    padding: 11px;
+    position: relative;
+}
+
+
+.dropdown a {
+    text-decoration: none;
+    color: white; /* White text in dropdown */
+    font-size: 1.2rem;
+    display: block;
+    font-family: 'Calibri', sans-serif; /* Set font family to Calibri */
+    font-weight: bold; /* Make text bold */
+    padding: 10px 20px; /* Add padding to cover the full row */
+    width: 100%; /* Ensure the background covers the entire row */
+    box-sizing: border-box; /* Include padding in width calculation */
+    
+}
+
+.dropdown a:hover {
+    background-color: #61140e; /* Darker hover effect for dropdown */
     color: white;
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide any overflow text */
-    text-overflow: ellipsis; /* Add ellipsis if text overflows */
-    text-align: center;
+    transform: scale(1.1);
+    
+    
 }
 
-.video-popup {
+/* Show Dropdown on Hover */
+.menu > li:hover > .dropdown {
+    display: block;
+    
+    
+}
+
+/* Submenu Styling */
+.dropdown-submenu {
+    display: none;
+    position: absolute;
+    top: 10px; /* Let the submenu inherit natural positioning */
+    left: 100%; /* Align to the right of the parent item */
+    background-color: #931f15;
+    list-style: none;
+    z-index: 1000;/* remove bullet points */
+    min-width: 200px; /* Ensure consistent width */
+    border: none;
+    
+}
+
+.dropdown-submenu li {
+    padding: 0px;
+}
+
+.dropdown-submenu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-family: 'Calibri', sans-serif; 
+    display: block;
+}
+
+.dropdown-submenu a:hover {
+    background-color: #61140e;
+}
+
+/* Show Submenu on Hover */
+.dropdown li:hover > .dropdown-submenu {
+    display: block;
+}
+
+/* ////////  video  /////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+.video-gallery {
+    display: flex;
+    background-color: #000000;
+    justify-content: space-between; /* Even spacing between videos */
+    align-items: center; /* Align videos vertically */
+    gap: 0; /* Remove extra spacing between videos */
+    margin: 0 auto; /* Center the gallery in the parent container */
+    padding: 0; /* Remove internal padding */
+    overflow: hidden; /* Remove horizontal scrolling */
+    white-space: normal; /* Allow wrapping instead of nowrap */
+    
+}
+
+/* Video Item */
+.video-item {
+    flex: 1; /* Ensure all video items share equal width */
+    max-width: 300px; /* Set a max width for each video */
+    margin: 0; /* Remove margins to prevent overflow */
+    
+    overflow: hidden; /* Avoid content overflow */
+}
+
+.video-item video {
+    width: 100%; /* Make video fill the container width */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0;
+    
+}
+.video-item:last-child video {
+    height: 98px; /* Ensure the last video matches the others */
+}
+
+.video-item:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Video Titles */
+.video-title {
+    margin-top: 5px; /* Space between video and title */
+    font-size: 0.8rem; /* Adjust font size */
+    color: rgb(189, 180, 180); /* Set text color */
+    font-weight: bold;
+    font-family: 'Calibri', sans-serif; /* Set font family to Calibri */
+    font-weight: bold; /* Make text bold */
+    text-align: center; /* Center-align title text */
+}
+
+/* Modal Styling */
+.video-modal {
     display: none;
     position: fixed;
-    z-index: 1001;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
-.video-popup-content {
-    position: relative;
-    margin: auto;
-    padding: 20px;
-    width: 80%;
-    max-width: 700px;
+.video-modal video {
+    max-width: 80%;
+    max-height: 80%;
+    outline: none;
 }
 
-.video-popup-content video {
-    width: 100%;
-}
-
-.close {
+.close-button {
     position: absolute;
-    top: 10px;
-    right: 0px;
-    color: #ffffff;
-    font-size: 35px;
-    font-weight: bold;
+    top: 20px;
+    right: 20px;
+    font-size: 2em;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* image horizontal /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+.image-section {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: visible; /* Ensure arrows are not clipped */
+
+}
+
+.image-slider {
+    display: flex;
+    overflow: hidden; /* Hide overflowing content */
+    scroll-snap-type: x mandatory; /* Snap to slides */
+    width: 100%; /* Allow the slider to shrink proportionally */
+}
+
+.image-slider .slide {
+    flex: 0 0 100%; /* Each slide takes up full width */
+    scroll-snap-align: start; /* Snap to start of each slide */
+    position: relative;
+    transition: transform 0.5s ease; /* Smooth scrolling */
+}
+
+.image-slider img {
+    width: 100%; /* Make images responsive */
+    height: auto;
+}
+
+.slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px; /* Height of the gradient */
+    background: linear-gradient(to bottom, black, transparent);
+    z-index: 2; /* Ensure it overlays the images */
+    pointer-events: none; /* Allow interactions with underlying content */
+}
+
+.image-slider::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Position the gradient at the bottom */
+    left: 0;
+    width: 100%;
+    height: 20px; /* Gradient height */
+    z-index: 2; /* Ensure it overlays the images */
+    pointer-events: none; /* Allow interactions with underlying content */
+}
+
+.slide {
+    flex: 0 0 100%; /* Each slide takes up the full width of the slider */
+    scroll-snap-align: start; /* Ensure each slide snaps into position */
+    position: relative;
+    transition: transform 0.5s ease-in-out; /* Smooth scrolling */
+    overflow: hidden;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+
+}
+
+/* The black shaded text part */
+.slide-info {
+    position: absolute; /* Positioned relative to the slide container */
+    top: 10%; /* Adjust position proportionally */
+    left: 5%; /* Adjust position proportionally */
+    width: 50%; /* Set width relative to the parent container */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    color: white; /* Text color */
+    padding: 2%; /* Padding proportional to the container */
+    font-size: 1.5vw; /* Font size scales with viewport width */
+    line-height: 1.5; /* Adjust line height for readability */
+    z-index: 5; /* Place above the image */
+    box-sizing: border-box; /* Include padding in width */
+    text-align: left; /* Optional: Align text to the left */
+    
+}
+
+/* Title within the text box */
+.slide-info h2 {
+    font-size: clamp(1rem, 2vw, 2rem); /* Scales between 1rem and 2rem based on viewport */
+    margin-bottom: 0.5rem; /* Add space between title and paragraph */
+}
+
+.slide-info p {
+    font-size: clamp(0.8rem, 1.5vw, 1.2rem); /* Dynamically scale the paragraph font size */
+    margin: 0; /* Remove unnecessary margin */
+    line-height: 1.5; /* Maintain readability */
+}
+
+
+
+
+/* Dots for navigation */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.slider-dots button {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.slider-dots button.active {
+    background-color: #931f15;
+}
+
+.slider-dots span {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
     cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
-    color: rgb(190, 241, 255);
-    text-decoration: none;
+/* Arrow Buttons */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
     cursor: pointer;
+    z-index: 10;
+    padding: 10px;
+    visibility: hidden; /* Initially hidden */
+    opacity: 0; /* Initially invisible */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.left-arrow {
+    left: 10px;
 }
 
+.right-arrow {
+    right: 10px;
+}
+
+/* Show Arrows on Hover */
+.image-section:hover .arrow {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+/* image virtical//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+.vertical-image-section {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 150px;
+    height: calc(100% - 50px); /* Adjust based on header height */
+    overflow-y: scroll;
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+.vertical-image-section::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in Chrome */
+}
+
+.vertical-image {
+    margin-bottom: 10px;
+}
+
+.vertical-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
 /* ////////////////////////////////////////////////////////search bar///////////////////////////////////////////////////////////////// */
 
 .search-container {
     display: flex;
     justify-content: center;
     gap: 2em; /* Space between the two search sections */
-    margin-top: 3em;
+    
+    margin-top: 0em;
 }
 
 .search-section {
     text-align: center;
+    
 }
 
 
 .search-section h2 {
-    font-size: 1.2em;
-    color: #3c8c8c; /* Adjust color as needed */
+    font-size: 1.5em;
+    color: #931f15; /* Adjust color as needed */
     margin-bottom: 0.5em;
+    font-family: 'Calibri', sans-serif; /* Set font family to Calibri */
+    font-weight: bold; /* Make text bold */
 }
 .search-bar-wrapper {
     position: relative; /* Position relative for absolute positioning of suggestions */
@@ -149,10 +472,17 @@ nav a {
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    
     overflow: hidden;
     width: 250px;
     margin-bottom: 1em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+}
+
+.search-bar:hover {
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
 }
 
 .search-bar input {
@@ -161,66 +491,182 @@ nav a {
     font-size: 14px;
     border: none;
     outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar input:focus {
+    background-color: #f5f5f5; /* Highlight input field on focus */
 }
 
 .search-bar button {
-    background-color: #3c8c8c;
+    background-color: #931f15;
     color: white;
     font-size: 14px;
     border: none;
     padding: 10px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #681210; /* Darker shade on hover */
 }
 
 .main-search-button {
     width: 250px; /* Match the width of the input fields */
     padding: 10px;
     font-size: 14px;
-    background-color: #3c8c8c;
+    background-color: #931f15;
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    
     margin: 2em auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.3s ease, background-color 0.3s ease; 
+    
+}
+
+.main-search-button:hover {
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+    background-color: #7a1713; /* Darker shade of red on hover */
 }
 
 .search-bar button:first-of-type {
     border-right: 1px solid #eee; /* Divider between dropdown and search icon */
     margin: 0; /* Remove any default margin */
+    
 }
+
 
 .suggestions {
     position: absolute; /* Position absolute within search-bar-wrapper */
     top: 100%; /* Place directly below the input field */
     left: 0;
-    background-color: white;
+    background-color: #931f15;
     width: 100%; /* Match the width of the input field */
     border: 1px solid #ccc;
     max-height: 150px; /* Show 5 suggestions with scrolling */
     overflow-y: auto;
+    overflow-x: hidden; 
     z-index: 1000;
+    font-size: 1rem;
+    font-family: Calibri, sans-serif;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: none; /* Initially hidden */
+}
+
+.suggestions::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Edge */
 }
 
 .suggestion-item {
     padding: 10px;
     cursor: pointer;
-    color: black;
+    color: rgb(255, 255, 255);
     border-bottom: 1px solid #eee;
     text-indent: -20%; /* Shift text 20% to the left */
 }
 
 .suggestion-item:hover {
-    background-color: #f1f1f1; /* Highlight suggestion on hover */
+    background-color: #000000; /* Highlight suggestion on hover */
+    transform: scale(1.05); /* Enlarge effect */
 }
 
 #suggestions .suggestion-item:last-child {
     border-bottom: none; /* Remove border for the last item */
 }
+
+/* SRJ Commitment Section //////////////////////////////////////////////////////////////////////////////////////////////////*/
+.commitment-section {
+    background-color: #000000; /* Light grey background */
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Calibri', sans-serif; /* Set font family to Calibri */
+    font-weight: bold; /* Make text bold */
+    margin: 0 auto;
+}
+
+.commitment-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    gap: 20px; /* Space between image and text */
+    align-items: center;
+}
+
+.commitment-image img {
+    width: 100%;
+    max-width: 300px; /* Adjust image size */
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.commitment-text {
+    flex: 1;
+    text-align: left;
+}
+
+.commitment-text h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    margin-left: 30px;
+    color: #ffffff;
+}
+
+.commitment-text ul {
+    list-style-type: disc;
+    margin: 0;
+    padding: 0 20px;
+    margin-left: 30px;
+}
+
+.commitment-text li {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Hidden state */
+/* Floating Text */
+#floating-text {
+    opacity: 0;
+    transform: translateY(20px); /* Position below its final location */
+    transition: opacity 1s ease, transform 1s ease;
+    text-align: right; /* Align the text to the right */
+    font-size: 1.5rem;
+    font-family: 'Calibri', sans-serif;
+    color: #ffffff; /* Match SRJ theme */
+    margin-top: -15px; /* Add space from the section content */
+    width: auto; /* Adjust width to content */
+    position: absolute; /* Align relative to the commitment-section */
+    right: 50px; /* Add a 100px margin from the right edge */
+}
+
+/* Visible state */
+#floating-text.visible {
+    opacity: 1;
+    transform: translateY(0); /* Move to its final location */
+}
+
+#floating-text::before {
+    content: '';
+    position: absolute;
+    top: 50%; /* Adjust to position the highlight */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #931f15; /* Highlight color */
+    z-index: -1; /* Place it behind the text */
+    width: 120%; /* Adjust width for shape */
+    height: 100%; /* Adjust height for shape */
+    clip-path: polygon(0 100%, 90% 100%, 100% 0, 5% 0); /* Custom shape */
+}
+/* ////////////////////////////////////////////////////////////////////////////Footer */
 
 footer {
     background-color: #000;
@@ -281,20 +727,257 @@ footer {
     color: #ccc;
 }
 
-.map-container {
-    margin-top: 20px;
-    border: 1px solid #777;
+
+
+
+/* Floating Window */
+.floating-window {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    font-family: Arial, sans-serif;
+}
+
+.window-header {
+    background-color: #931f15;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+.window-title {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.minimize-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.window-content {
+    padding: 15px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.window-content input {
+    width: 80%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    overflow: hidden;
-    width: 200%;
-    height: 150px;
-    position: relative;
-    left: -100%;
+    font-size: 0.9em;
+}
+
+.submit-quote {
+    background-color: #931f15;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.submit-quote:hover {
+    background-color: #931f15;
+}
+
+/* Minimized Bar */
+.minimized-bar {
+    position: fixed;
+    bottom: 40px;
+    right: 0;
+    height: 50px;
+    width: 30px;
+    background-color: #931f15;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 0 0 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+    display: none; /* Initially hidden */
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.restore-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.contact-preference {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between elements */
+    margin: 10px 0;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.contact-preference label {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between checkbox and text */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.contact-preference input[type="checkbox"] {
+    margin: 0; /* Remove default margin */
+    cursor: pointer;
+}
+
+
+#confirmation-modal p {
+    text-align: center;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+#new-quote {
+    display: block;
+    margin: 0 auto;
+}
+
+
+.image-container {
+    flex: 1;
+    max-width: 50%;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
     
 }
-.map-container iframe {
-    width: 100%; /* Fill the container */
-    height: 100%; /* Fill the container */
+
+.category {
+    display: flex;
+    border: 1px solid #ddd;
+    background-color: white;
+    
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+.category:hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: scale(1.01); /* Slightly enlarge the search bar */
+}
+
+.category-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color */
+    display: block; /* Make the link cover the entire block */
+}
+
+.category-link:hover {
+    text-decoration: none; /* Ensure no underline on hover */
+    color: inherit; /* Prevent color change on hover */
+}
+
+.image-container {
+    flex: 1;
+    max-width: 50%;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
     display: block;
-    border: none; /* Remove border if any */
+}
+
+.category-info {
+    flex: 1;
+    padding: 20px;
+}
+
+.category-info h2 {
+    margin-top: 0;
+    color: #931f15;
+}
+
+.category-info p {
+    margin: 0;
+    color: #555;
+}
+
+.category-info ul {
+    list-style-type: disc; /* Ensure bullet points are visible */
+    padding-left: 20px; /* Add space before the list */
+    margin: 10px 0; /* Add spacing above and below the list */
+}
+
+.category-info li {
+    margin-bottom: 5px; /* Add space between list items */
+    font-size: 1rem; /* Adjust font size */
+    color: #333; /* Set text color */
+}
+
+.bullet-button {
+    background-color: #931f15; /* SRJ theme color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-family: 'Calibri', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.bullet-button:hover {
+    background-color: #61140e; /* Darker color on hover */
+    transform: scale(1.1); /* Slight enlarge on hover */
+}
+
+/* Container holding the buttons */
+.button-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to the next line */
+    justify-content: center; /* Center align the buttons */
+    gap: 15px; /* Space between rows and columns */
+}
+
+/* Individual buttons */
+.button {
+    background-color: #931f15; /* Button background */
+    color: white; /* Button text color */
+    padding: 10px 20px; /* Add padding for button size */
+    border: none;
+    border-radius: 5px; /* Optional: rounded corners */
+    text-align: center;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #61140e; /* Darker color on hover */
 }

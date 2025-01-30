@@ -9,164 +9,328 @@
 <body>
     <header>
         <div class="title">
-            <strong>SRJ, Inc.</strong>
+            <img src="/img/home_logo/SRJ.jpg" alt="Logo" class="title-logo">
+            <!-- <strong>SRJ, Inc.</strong> -->
         </div>
         <nav class="function_button">
-            <a href="home.html">Home</a>
-            <a href="category.html">Category</a>
-            <a href="login.html" id="login-icon">Login</a>
+            <ul class="menu">
+                <li>
+                    <a href="#">Products</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Rubber Track</a></li>
+                        <li><a href="shoe_pad.html">Shoe Pad</a></li>
+                        <li><a href="underccarriage.html">Undercarriage Parts</a></li>
+                        <li>
+                            <a href="#">Ground Engaging Tool</a>
+                            <ul class="dropdown-submenu">
+                                <li><a href="bucket_tooth.html">Bucket Tooth</a></li>
+                                <li><a href="auger_part.html">Auger Parts</a></li>
+                                <li><a href="#">Asphalt Cutting Tool</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Agricultural Products</a>
+                            <ul class="dropdown-submenu">
+                                <li><a href="#">Mud Clearance High Traction Rubber Track</a></li>
+                                <li><a href="#">Rubber Mounted Pickup Tine</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">QA</a></li>
+                <li><a href="#">Warranty Claim</a></li>
+                <li><a href="search_result.html">Search</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
         </nav>
     </header>
-    <div class="scroll-container">
-        <div class="gif-container">
-            <div class="gif-item">
-                <a href="#video1" class="gif-link">
-                    <img src="video/greengif.gif" alt="gif1">
-                </a>
-            </div>
-            <div class="gif-item">
-                <a href="#video2" class="gif-link">
-                    <img src="video/spraygif.gif" alt="gif2">
-                </a>
-            </div>
-            <div class="gif-item">
-                <a href="#video3" class="gif-link">
-                    <img src="video/wrapgif.gif" alt="gif3">
-                </a>
-            </div>
-            <!-- Duplicate GIFs for seamless scrolling -->
-            <div class="gif-item">
-                <a href="#video1" class="gif-link">
-                    <img src="video/greengif.gif" alt="gif1">
-                </a>
-            </div>
-            <div class="gif-item">
-                <a href="#video2" class="gif-link">
-                    <img src="video/spraygif.gif" alt="gif2">
-                </a>
-            </div>
-            <div class="gif-item">
-                <a href="#video3" class="gif-link">
-                    <img src="video/wrapgif.gif" alt="gif3">
-                </a>
-            </div>
-            <div class="gif-item">
-                <a href="#video1" class="gif-link">
-                    <img src="video/greengif.gif" alt="gif1">
-                </a>
-            </div>
-            <div class="gif-item">
-                <a href="#video2" class="gif-link">
-                    <img src="video/spraygif.gif" alt="gif2">
-                </a>
-            </div>
-            <div class="gif-item">
-                <a href="#video3" class="gif-link">
-                    <img src="video/wrapgif.gif" alt="gif3">
-                </a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Pop-up video sections -->
-    <div id="video1" class="video-popup">
-        <div class="video-popup-content">
-            <span class="close">&times;</span>
-            <video controls width="100%">
-                <source src="video/Green.mp4" type="video/mp4">
-            </video>
-        </div>
-    </div>
-    
-    <div id="video2" class="video-popup">
-        <div class="video-popup-content">
-            <span class="close">&times;</span>
-            <video controls width="100%">
-                <source src="video/spray.mp4" type="video/mp4">
-            </video>
-        </div>
-    </div>
-    
-    <div id="video3" class="video-popup">
-        <div class="video-popup-content">
-            <span class="close">&times;</span>
-            <video controls width="100%">
-                <source src="video/wrapgif.mp4" type="video/mp4">
-            </video>
-        </div>
-    </div>
 
-    <!-- Search Container -->
-    <div class="search-container">
-        <!-- Machine Make Search -->
-        <div class="search-section">
-            <h2>Machine Make</h2>
-            <div class="search-bar-wrapper">
-                <div class="search-bar">
-                    <input type="text" id="makeSearchQuery" name="makeSearchQuery" placeholder="Enter Machine Make" autocomplete="off">
-                    <button type="button" id="makeDropdownButton">&#9660;</button>
+    
+    <!-- video embeded section -->
+    <div class="video-gallery">
+        <div class="video-item">
+            <video muted autoplay loop>
+                <source src="/img/Home_page_video/1.mp4" type="video/mp4">
+            </video>
+            <p class="video-title">
+                Streamline</p>
+        </div>
+        <div class="video-item">
+            <video muted autoplay loop>
+                <source src="/img/Home_page_video/2.mp4" type="video/mp4">
+            </video>
+            <p class="video-title">Peeling Test</p>
+        </div>
+        <div class="video-item">
+            <video muted autoplay loop>
+                <source src="/img/Home_page_video/3.mp4" type="video/mp4">
+            </video>
+            <p class="video-title">Field Test</p>
+        </div>
+        <div class="video-item">
+            <video muted autoplay loop>
+                <source src="/img/Home_page_video/4.mp4" type="video/mp4">
+            </video>
+            <p class="video-title">SRJ Undercarriage</p>
+        </div>
+    </div>
+    
+    
+    <!-- Modal for Enlarged Video -->
+    <div id="video-modal" class="video-modal">
+        <span class="close-button">&times;</span>
+        <video id="modal-video" controls autoplay>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="main-container">
+        
+        <div class="image-section">
+            <!-- Horizontal Scrolling Image Slider -->
+            <div class="image-slider">
+                <div class="slide" data-top="50%" data-left="30%"> <!--larger the number, more right/bot-->
+                    <img src="img/GETT_man_bg.jpg" alt="Image 2">
+                    <div class="slide-info">
+                        <h2>Do you:</h2>
+                        <p>buy bucket teeth without </p>checking <strong style="color: #ffc8c3;">Charpy Impact</strong> data at -40&deg;F?</p></p>
+
+                    </div>
                 </div>
-                <div id="makeSuggestions" class="suggestions"></div>
-            </div>
-        </div>
 
-        <!-- Machine Model Search -->
-        <div class="search-section">
-            <h2>Machine Model</h2>
-            <div class="search-bar-wrapper">
-                <div class="search-bar">
-                    <input type="text" id="modelSearchQuery" name="modelSearchQuery" placeholder="Enter Machine Model" autocomplete="off">
-                    <button type="button" id="modelDropdownButton">&#9660;</button>
+                <div class="slide" data-top="40%" data-left="30%">
+                    <img src="img/show.jpg" alt="Image 1">
+                    <div class="slide-info">
+                        <h2>HiQual Rubber Tracks</h2>
+                        <p>With unique <strong><em>S'Wave</em></strong> design, Patented Auti-Vibration System, <strong>one tread lug per iorn core</strong>, <p>and <strong>Continous Ground Contact</strong>, we garentee: </p><li>Smooth required!</li><li>Good Traction!</li><li>Good Wear!</li></p>
+                    </div>
+                    
                 </div>
-                <div id="modelSuggestions" class="suggestions"></div>
+                
+                <div class="slide" data-top="50%" data-left="50%"> <!--larger the number, more right/bot-->
+                    <img src="img/track.jpg" alt="Image 2">
+                    <div class="slide-info">
+                        <h2>Compare to Other Wide & C-pattern style:</h2>
+                        <p>Each Tread Lug <strong>Indepemndently, Interactively</strong> Sprocket Engaed</p>
+                        <p><strong><em>S'Wave</em></strong> has more traction than Wide pattern by <strong>21%</strong> and C pattern by <strong>36%</strong></p>
+
+                    </div>
+                </div>
+
+                
+                    
+            </div>
+        
+            <!-- Navigation Dots -->
+            <div class="slider-dots">
+                <!-- Dots will be dynamically added via JavaScript -->
+            </div>
+        
+            <!-- Left and Right Arrows -->
+            <button class="arrow left-arrow">&#9664;</button>
+            <button class="arrow right-arrow">&#9654;</button>
+        </div>
+
+        <!-- Search Container -->
+        <div class="search-container">
+            <!-- Machine Make Search -->
+            <div class="search-section">
+                <h2>Machine Make</h2>
+                <div class="search-bar-wrapper">
+                    <div class="search-bar">
+                        <input type="text" id="makeSearchQuery" name="makeSearchQuery" placeholder="Search for Machine Make" autocomplete="off">
+                        <button type="button" id="makeDropdownButton">&#9660;</button>
+                    </div>
+                    <div id="makeSuggestions" class="suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Machine Model Search -->
+            <div class="search-section">
+                <h2>Machine Model</h2>
+                <div class="search-bar-wrapper">
+                    <div class="search-bar">
+                        <input type="text" id="modelSearchQuery" name="modelSearchQuery" placeholder="Search for Machine Model" autocomplete="off">
+                        <button type="button" id="modelDropdownButton">&#9660;</button>
+                    </div>
+                    <div id="modelSuggestions" class="suggestions"></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Single Search Button -->
-    <button id="mainSearchButton" class="main-search-button">Search</button>
-    
-    <!-- Footer Section -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section about">
-                <h3>About</h3>
-                <p>SRJ, Inc. began as ISR (International Sales Representative) in 1994 and was later incorporated, in December of 1997, as SRJ, Inc. As the first off-shore based supplier to pass the strict Charpy impact and Brinell hardness requirements of major American OEMs, SRJ, Inc.</p>
-            </div>
-            <div class="footer-section contact">
-                <h3>Contact</h3>
-                <p>Phone: (+1) 847-404-4401</p>
-                <p>Fax: 630.351.0779</p>
-                <p>Email: <a href="mailto:Sales@SRJinc.com">Sales@SRJinc.com</a></p>
+        <!-- Single Search Button -->
+        <button id="mainSearchButton" class="main-search-button">Search</button>
+
+        
+        
+        <!-- SRJ Commitment Section -->
+        <section class="commitment-section">
+            <div class="commitment-container">
+                <!-- Image on the left -->
+                <div class="commitment-image">
+                    <img src="img/CTooth.jpg" alt="SRJ Commitment Image">
+                </div>
+                <!-- Text content on the right -->
+                <div class="commitment-text">
+                    <h2>SRJ Commitment</h2>
+                    <ul>
+                        <li><strong>Quality Assurance</strong></li>
+                        <li><strong>On-Time Delivery</strong></li>
+                        <li><strong>Customer Satisfaction</strong></li>
+                    </ul>
+                </div>
             </div>
             
-            <div class="footer-section address">
-                <h3>Address</h3>
-                <p>SRJ, Inc.<br>2242 Palmer Drive<br>Schaumburg, IL 60173 USA</p>
-                <div class="map-container">
-                    <!-- Embedded Google Map -->
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2367.8851415983977!2d-88.06596792390563!3d42.06923277122142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fa58eff129b6b%3A0xf6928350fa19e3!2s2242%20Palmer%20Dr%2C%20Schaumburg%2C%20IL%2060173!5e1!3m2!1sen!2sus!4v1734375295974!5m2!1sen!2sus" 
-                        width="100%" 
-                        height="200" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
+        </section>
+        <div id="floating-text" class="hidden">
+            Call us now: <strong>(847) 404-4401</strong>
+        </div>
+        
+        <section class="categories">
+            <!-- Category 1 -->
+            <a href="search_result.html" class="category-link">
+                <div class="category">
+                    <div class="image-container">
+                        <img src="img/Home_page_video/track1.jpg" alt="Category 1 Image">
+                    </div>
+                    <div class="category-info">
+                        <h2>Rubber Track & Shoe Pad</h2>
+                        <br> We have different self-designed patterns for different types of territories<br>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Category 2 -->
+            <div class="category">
+                <div class="image-container">
+                    <img src="img/Home_page_video/under2.jpg" alt="Category 2 Image">
+                </div>
+                <div class="category-info">
+                    <h2>Undercarriage Part</h2>
+                    <ul>
+                        <button class="bullet-button" onclick="window.location.href='sprockets.html'">Sprockets</button>
+                        <button class="bullet-button" onclick="window.location.href='idlers.html'">Idlers</button>
+                        <button class="bullet-button" onclick="window.location.href='rollers.html'">Rollers</button>
+                    </ul>
                 </div>
             </div>
-        </div>
-        <div class="footer-logo">
-            <img src="img/SRJ Logo Round.jpg" alt="SRJ Logo" />
-            <img src="img/Hiqual Logo Black tif.jpg" alt="HiQual Logo" />
-            <img src="img/GETIT Logo.jpg" alt="GETT Logo" />
-        </div>
-        <div class="footer-bottom">
-            <p>Copyright &copy; 2024 SRJ, Inc. - All Rights Reserved</p>
-        </div>
-    </footer>
 
-    <script src="js/home.js"></script>
+            <!-- Category 3 -->
+            <div class="category">
+                <div class="image-container">
+                    <img src="img/Home_page_video/angerparts.jpg" alt="Category 3 Image">
+                </div>
+                <div class="category-info">
+                    <h2>Ground engaging Tools</h2>
+                    <ul>
+                        <button class="bullet-button" onclick="window.location.href='bucket_tooth.html'">Bucket tooth</button>
+                        <button class="bullet-button" onclick="window.location.href='shank.html'">Shank</button>
+                        <button class="bullet-button" onclick="window.location.href='auger_part.html'">Auger part</button>
+                        <button class="bullet-button" onclick="window.location.href='road_milling.html'">Road milling tool</button>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Category 4 -->
+            <div class="category">
+                <div class="image-container">
+                    <img src="img/Home_page_video/algparts.jpg" alt="Category 4 Image">
+                </div>
+                <div class="category-info">
+                    <h2>Algricultural Products</h2>
+                    <ul>
+                        <button class="bullet-button" onclick="window.location.href='pick_tine.html'">Pick Up Tine</button>
+                        <button class="bullet-button" onclick="window.location.href='traction.html'">Mud Clearance High Traction Track</button>
+                        <button class="bullet-button" onclick="window.location.href='rubber_tine.html'">Rubber Mounted Pickup Tine</button>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-section about">
+                    <h3>About</h3>
+                    <p>SRJ, Inc. began as ISR (International Sales Representative) in 1994 and was later incorporated, in December of 1997, as SRJ, Inc. As the first off-shore based supplier to pass the strict Charpy impact and Brinell hardness requirements of major American OEMs, SRJ, Inc.</p>
+                </div>
+                <div class="footer-section contact">
+                    <h3>Contact</h3>
+                    <p>Phone: (+1) 847-404-4401</p>
+                    <p>Fax: 630.351.0779</p>
+                    <p>Email: <a href="mailto:Sales@SRJinc.com">Sales@SRJinc.com</a></p>
+                </div>
+                
+                <div class="footer-section address">
+                    <h3>Address</h3>
+                    <p>SRJ, Inc.<br>2242 Palmer Drive<br>Schaumburg, IL 60173 USA</p>
+                    
+                    <!-- <div class="map-container"> -->
+                        <!-- Embedded Google Map -->
+                        <!-- <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2367.8851415983977!2d-88.06596792390563!3d42.06923277122142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fa58eff129b6b%3A0xf6928350fa19e3!2s2242%20Palmer%20Dr%2C%20Schaumburg%2C%20IL%2060173!5e1!3m2!1sen!2sus!4v1734375295974!5m2!1sen!2sus" 
+                            width="100%" 
+                            height="200" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe> -->
+                    <!-- </div> -->
+
+                </div>
+            </div>
+            <div class="footer-logo">
+                <img src="img/home_logo/SRJ.jpg" alt="SRJ Logo" />
+                <img src="img/home_logo/Hiqual.jpg" alt="HiQual Logo" />
+                <img src="img/home_logo/GETIT.jpg" alt="GETT Logo" />
+                <img src="img/home_logo/ISO.jpg" alt="ISO certificate" />
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2024 SRJ, Inc. - All Rights Reserved</p>
+            </div>
+        </footer>
+
+        <!-- Floating Quote Window -->
+        <div id="floating-window" class="floating-window">
+            <div class="window-header">
+                <span class="window-title">Get a quick quote now!</span>
+                <button id="minimize-button" class="minimize-button">&minus;</button>
+            </div>
+            <div class="window-content">
+                <form id="quoteForm" class="window-content">
+                    <p>Our expert will contact you immediately!</p>
+                    
+                    <input type="text" id="quoteContent" placeholder="Machine make/model" required />
+                    <input type="text" id="customerName" placeholder="Contact Name" required />
+                    <input type="email" id="email" placeholder="Email" required />
+                    <input type="text" id="phone" placeholder="Phone number" required />
+                    <div class="contact-preference">
+                        <span>you prefer contact through:</span>
+                        <label>
+                            <input type="checkbox" name="contact" value="phone" id="preferPhone" /> phone
+                        </label>
+                        <label>
+                            <input type="checkbox" name="contact" value="email" id="preferEmail" /> email
+                        </label>
+                    </div>
+                    <button type="submit" class="submit-quote">Submit Quote</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmation-modal" style="display:none;">
+            <p>Your quote is being successfully sent to our specialist, they will get in touch with you soon!</p>
+            <button id="new-quote-button">New Quote</button>
+        </div>
+
+        <!-- Minimized Bar -->
+        <div id="minimized-bar" class="minimized-bar">
+            <button id="restore-button" class="restore-button">&laquo;</button>
+        </div>
+
+        <script src="js/home.js"></script>
+    </div>
 </body>
 </html>
